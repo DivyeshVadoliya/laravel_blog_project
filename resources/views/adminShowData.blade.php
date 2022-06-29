@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Dashboard') }}
+            {{ __('Admin Show All Data') }}
         </h2>
     
     </x-slot>
@@ -35,7 +35,6 @@
                                           <td>{{$post->tital}}</td>
                                           <td>{{$post->blog}}</td>
                                           <td>
-                                              <a href="{{url('/edit',$post->id)}}" class="btn btn-info btn-sm">Edit</a>
                                               <a href="{{url('/delete',$post->id)}}" class="btn btn-danger btn-sm">Delete</a>
                                           </td>
                                         </tr>

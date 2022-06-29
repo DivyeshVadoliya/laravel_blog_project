@@ -23,7 +23,7 @@ Route::group(['middleware'=>['auth']],function(){
 	Route::get('/edit/{id}',[postController::class,'edit'])->name('post_edit');
 	Route::put('/edit/{id}',[postController::class,'update'])->name('post_update');
 	Route::get('/delete/{id}',[postController::class,'destroy'])->name('post_destroy');
-
+	Route::get('/displayData', [postController::class,'showAdmin'])->name('display_admin_data');
 });
 
 require __DIR__.'/auth.php';

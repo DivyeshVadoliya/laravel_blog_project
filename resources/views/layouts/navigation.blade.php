@@ -21,6 +21,13 @@
                         {{ __('post') }}
                     </x-nav-link>
                 </div>
+                @can('isAdmin')
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-nav-link :href="route('display_admin_data')" :active="request()->routeIs('display_admin_data')">
+                        {{ __('All Data') }}
+                    </x-nav-link>
+                </div>
+                @endcan
             </div>
 
             <!-- Settings Dropdown -->

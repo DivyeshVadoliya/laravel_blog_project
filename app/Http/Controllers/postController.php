@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Post;
 use App\Models\User;
+use App\Gates\AdminGates;
+use Illuminate\Support\Facades\Gate;
 
 class postController extends Controller
 {
@@ -32,7 +34,7 @@ class postController extends Controller
         $post->tital=$request->title;
         $post->blog=$request->blog;
         $user->post()->save($post);
-        return redirect(route('post_index'))->with('status','blog added..!');
+        return redirect(route('dashboard'))->with('status','blog added..!');
 
     }
 
@@ -53,9 +55,10 @@ class postController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function showAdmin()
     {
-        //
+        $posts=Post::all();
+        return view('adminShowData',['posts'=>$posts]);
     }
 
     /**
@@ -98,7 +101,11 @@ class postController extends Controller
     public function destroy($id)
     {
         //
+        if(Gate::denies('isAdmin',$id)){
+           // abort(403);
+            return redirect(route('dashboard'))->with('status','You do not have authority to Delete....!'); 
+        }
         Post::destroy($id);
-        return redirect(route('dashboard'))->with('status','blog Deleted....!'); 
+        return redirect(route('display_admin_data'))->with('status','blog Deleted....!'); 
     }
 }
